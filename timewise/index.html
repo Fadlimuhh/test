@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f7fb">
+  <title>TimeWise — Atur Waktu, Raih Tujuan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#beranda" aria-label="TimeWise beranda">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <span>time<span class="brand-accent">wise</span><small>MAKE EVERY MOMENT COUNT</small></span>
+      </a>
+      <div class="nav-caption">MENU UTAMA</div>
+      <nav class="nav-menu" aria-label="Menu utama">
+        <button class="nav-link active" data-page="beranda"><span class="nav-icon">▦</span> Beranda</button>
+        <button class="nav-link" data-page="tugas"><span class="nav-icon">☷</span> Daftar Tugas <span class="nav-count" id="navTaskCount">0</span></button>
+        <button class="nav-link" data-page="jadwal"><span class="nav-icon">▦</span> Jadwal Harian</button>
+        <button class="nav-link" data-page="fokus"><span class="nav-icon">◷</span> Fokus Belajar</button>
+        <button class="nav-link" data-page="tips"><span class="nav-icon">✧</span> Tips Manajemen Waktu</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><div class="note-icon">✦</div><strong>Pelan-pelan asal konsisten.</strong><p>Langkah kecil hari ini membawa hasil besar nanti.</p></div>
+        <div class="sidebar-footer"><span class="status-dot"></span> Data tersimpan di perangkat ini</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Buka menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumbPage">Beranda</strong></div>
+        <div class="topbar-right"><div class="today-chip"><span class="calendar-mini">▦</span><span id="topbarDate">Hari ini</span></div><div class="avatar">TW</div></div>
+      </header>
+
+      <section class="page active-page" id="page-beranda">
+        <div class="welcome-row"><div><div class="eyebrow">DASHBOARD HARIAN</div><h1>Atur waktumu, <span class="text-gradient">raih tujuanmu.</span></h1><p class="page-subtitle" id="welcomeDate">Satu langkah kecil tetaplah sebuah kemajuan.</p></div><button class="btn btn-primary" data-open-task><span>＋</span> Tambah Tugas</button></div>
+        <section class="hero-card">
+          <div class="hero-copy"><div class="hero-tag"><span class="sparkle">✦</span> RENCANA HARI INI</div><h2>Fokus pada hal<br>yang <em>penting.</em></h2><p>Waktu tidak bisa diulang, tapi cara kita menggunakannya bisa diperbaiki setiap hari.</p><button class="btn btn-light" data-page="tugas">Lihat daftar tugas <span>→</span></button></div>
+          <div class="hero-art" aria-hidden="true"><div class="art-sun"></div><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-clock"><div class="clock-face"><span class="clock-dot"></span><span class="clock-hand hand-hour"></span><span class="clock-hand hand-minute"></span></div></div><div class="floating-card card-check"><span class="check-circle">✓</span><span><b>Keep going!</b><small>Progress starts here</small></span></div><div class="floating-card card-time"><span class="mini-icon">◷</span><span><b>25 min</b><small>Focus session</small></span></div><div class="art-plant"><i></i><i></i><i></i><b></b></div></div>
+        </section>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total Tugas</span><span class="stat-icon lavender">☷</span></div><div class="stat-value" id="statTotal">0</div><div class="stat-foot">Semua tugas tercatat</div><div class="stat-line"><span style="width:72%"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Belum Selesai</span><span class="stat-icon orange">◷</span></div><div class="stat-value" id="statPending">0</div><div class="stat-foot">Satu per satu, kamu pasti bisa</div><div class="stat-line orange-line"><span id="pendingLine" style="width:35%"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Tugas Selesai</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="statDone">0</div><div class="stat-foot"><span class="positive-dot">●</span> Setiap progres berarti</div><div class="stat-line green-line"><span id="doneLine" style="width:0%"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Progres Kamu</span><span class="stat-icon blue">↗</span></div><div class="stat-value"><span id="statProgress">0</span><small>%</small></div><div class="stat-foot">Terus tingkatkan konsistensi</div><div class="stat-line blue-line"><span id="progressLine" style="width:0%"></span></div></article>
+        </div>
+        <div class="content-grid dashboard-bottom">
+          <section class="panel task-panel"><div class="panel-heading"><div><h3>Tugas Terdekat</h3><p>Jangan sampai ada yang terlewat.</p></div><button class="text-button" data-page="tugas">Lihat semua <span>→</span></button></div><div id="upcomingTasks" class="task-list"></div><div class="empty-state compact-empty" id="dashboardEmpty"><div class="empty-illustration">✓</div><strong>Belum ada tugas</strong><p>Tambahkan tugas pertamamu dan mulai atur waktu.</p><button class="btn btn-primary btn-small" data-open-task>＋ Buat tugas</button></div></section>
+          <section class="panel progress-panel"><div class="panel-heading"><div><h3>Ringkasan Progres</h3><p>Setiap tugas membawamu maju.</p></div><span class="tiny-badge">HARI INI</span></div><div class="progress-circle-wrap"><div class="progress-circle" id="progressCircle"><div class="circle-inner"><strong id="circlePercent">0%</strong><span>terselesaikan</span></div></div></div><div class="progress-legend"><div><span class="legend-dot done-dot"></span><span>Selesai</span><strong id="legendDone">0</strong></div><div><span class="legend-dot pending-dot"></span><span>Belum selesai</span><strong id="legendPending">0</strong></div></div><div class="encouragement"><span>✦</span><p id="encouragementText">Mulai dari satu tugas kecil hari ini.</p></div></section>
+        </div>
+      </section>
+
+      <section class="page" id="page-tugas">
+        <div class="page-heading-row"><div><div class="eyebrow">TETAP TERORGANISASI</div><h1>Daftar Tugas</h1><p class="page-subtitle">Catat pekerjaanmu, tentukan prioritas, dan selesaikan tepat waktu.</p></div><button class="btn btn-primary" data-open-task><span>＋</span> Tambah Tugas</button></div>
+        <div class="task-toolbar"><div class="search-box"><span>⌕</span><input id="taskSearch" type="search" placeholder="Cari nama tugas..." aria-label="Cari tugas"></div><select id="filterStatus" aria-label="Filter status"><option value="all">Semua status</option><option value="pending">Belum selesai</option><option value="done">Selesai</option></select><select id="filterPriority" aria-label="Filter prioritas"><option value="all">Semua prioritas</option><option value="high">Tinggi</option><option value="medium">Sedang</option><option value="low">Rendah</option></select><select id="sortTasks" aria-label="Urutkan tugas"><option value="deadline">Deadline terdekat</option><option value="priority">Prioritas tertinggi</option><option value="newest">Paling baru</option></select></div>
+        <div class="task-summary-strip"><div><span class="summary-bullet all-bullet"></span> Semua <strong id="filterCountAll">0</strong></div><div><span class="summary-bullet pending-bullet"></span> Belum selesai <strong id="filterCountPending">0</strong></div><div><span class="summary-bullet done-bullet"></span> Selesai <strong id="filterCountDone">0</strong></div></div>
+        <section class="panel full-task-panel"><div class="panel-heading"><div><h3>Semua Pekerjaan</h3><p id="taskListSubtitle">Daftar tugas kamu akan muncul di sini.</p></div><span class="tiny-badge" id="taskCountBadge">0 TUGAS</span></div><div id="allTasks" class="task-list large-task-list"></div><div class="empty-state" id="tasksEmpty"><div class="empty-illustration">☷</div><strong>Tugas belum ditemukan</strong><p>Coba ubah kata pencarian atau tambahkan tugas baru.</p><button class="btn btn-primary btn-small" data-open-task>＋ Tambah tugas</button></div></section>
+      </section>
+
+      <section class="page" id="page-jadwal">
+        <div class="page-heading-row"><div><div class="eyebrow">RUTINITAS YANG SEIMBANG</div><h1>Jadwal Harian</h1><p class="page-subtitle">Rencanakan harimu agar belajar, beraktivitas, dan istirahat tetap seimbang.</p></div><button class="btn btn-primary" id="addScheduleBtn"><span>＋</span> Tambah Agenda</button></div>
+        <section class="panel schedule-panel"><div class="panel-heading"><div><h3>Agenda Kegiatan</h3><p id="scheduleDateLabel">Rencana kegiatan harianmu.</p></div><input class="date-control" type="date" id="scheduleDate" aria-label="Tanggal jadwal"></div><div id="scheduleList" class="schedule-list"></div><div id="scheduleEmpty" class="empty-state"><div class="empty-illustration">▦</div><strong>Belum ada agenda untuk tanggal ini</strong><p>Tambahkan aktivitas supaya harimu lebih terencana.</p><button class="btn btn-primary btn-small" id="emptyAddSchedule">＋ Tambah agenda</button></div></section>
+        <div class="tip-banner"><div class="tip-banner-icon">☼</div><div><strong>Jangan lupa sisihkan waktu untuk istirahat.</strong><p>Jadwal yang baik bukan jadwal yang penuh, melainkan jadwal yang realistis dan bisa dijalankan.</p></div></div>
+      </section>
+
+      <section class="page" id="page-fokus">
+        <div class="page-heading-row"><div><div class="eyebrow">SEDIKIT DEMI SEDIKIT</div><h1>Fokus Belajar</h1><p class="page-subtitle">Kurangi distraksi dan beri perhatian penuh pada satu hal dalam satu waktu.</p></div></div>
+        <div class="focus-layout"><section class="panel focus-panel"><div class="focus-label"><span class="focus-pulse"></span> FOCUS SESSION</div><div class="timer-mode"><button class="timer-mode-btn active" data-minutes="25" data-mode="Fokus">Fokus</button><button class="timer-mode-btn" data-minutes="5" data-mode="Istirahat singkat">Istirahat singkat</button><button class="timer-mode-btn" data-minutes="15" data-mode="Istirahat panjang">Istirahat panjang</button></div><div class="timer-ring" id="timerRing"><div class="timer-inner"><span id="timerModeLabel">WAKTU FOKUS</span><strong id="timerDisplay">25:00</strong><small id="timerSubtext">Satu hal dalam satu waktu.</small></div></div><div class="timer-actions"><button class="btn btn-primary" id="timerStart">▶ Mulai fokus</button><button class="btn btn-outline" id="timerReset">↻ Ulangi</button></div><p class="timer-session-count">Sesi selesai hari ini: <strong id="sessionCount">0</strong></p></section><section class="focus-side"><div class="panel focus-note"><div class="note-icon large-note-icon">✦</div><h3>Siapkan dirimu untuk fokus</h3><p>Ambil satu tugas yang paling penting, jauhkan gangguan, dan mulai dari durasi yang terasa nyaman.</p><div class="focus-checklist"><div><span>✓</span> Pilih satu tugas</div><div><span>✓</span> Matikan notifikasi</div><div><span>✓</span> Siapkan air minum</div><div><span>✓</span> Beri jeda untuk istirahat</div></div></div><div class="quote-card"><span>“</span><p>Fokus bukan tentang melakukan semuanya, tetapi tentang melakukan hal yang tepat dengan penuh perhatian.</p></div></section></div>
+      </section>
+
+      <section class="page" id="page-tips">
+        <div class="page-heading-row"><div><div class="eyebrow">BELAJAR MENGELOLA WAKTU</div><h1>Tips Manajemen Waktu</h1><p class="page-subtitle">Kebiasaan kecil yang bisa membantu hari-harimu lebih terarah.</p></div></div>
+        <section class="definition-card"><div class="definition-mark">“</div><div><div class="eyebrow">APA ITU MANAJEMEN WAKTU?</div><h2>Menggunakan waktu untuk hal yang benar-benar penting.</h2><p>Manajemen waktu adalah kemampuan merencanakan dan mengatur penggunaan waktu agar kegiatan dapat diselesaikan secara efektif sesuai prioritas dan tujuan.</p></div><div class="definition-art" aria-hidden="true"><div class="def-clock">◷</div><span>PLAN</span><span>DO</span><span>GROW</span></div></section>
+        <div class="section-title"><div><h2>Mulai dari kebiasaan sederhana</h2><p>Tidak perlu langsung sempurna. Pilih satu tips dan praktikkan hari ini.</p></div></div>
+        <div class="tips-grid">
+          <article class="tip-card"><div class="tip-card-icon purple-bg">☷</div><span class="tip-number">01 / PRIORITAS</span><h3>Tentukan yang terpenting</h3><p>Tulis semua tugas, lalu kerjakan tugas dengan deadline dekat atau dampak paling besar terlebih dahulu.</p><div class="tip-action"><span>Yang penting dulu</span><span>↗</span></div></article>
+          <article class="tip-card"><div class="tip-card-icon orange-bg">◷</div><span class="tip-number">02 / RENCANA</span><h3>Buat jadwal realistis</h3><p>Perkirakan waktu yang dibutuhkan untuk setiap kegiatan dan sisakan waktu cadangan jika ada perubahan.</p><div class="tip-action"><span>Rencanakan harimu</span><span>↗</span></div></article>
+          <article class="tip-card"><div class="tip-card-icon green-bg">✦</div><span class="tip-number">03 / KONSISTENSI</span><h3>Pecah tugas besar</h3><p>Ubah pekerjaan besar menjadi langkah kecil agar lebih mudah dimulai dan tidak terasa membebani.</p><div class="tip-action"><span>Mulai dari kecil</span><span>↗</span></div></article>
+          <article class="tip-card"><div class="tip-card-icon blue-bg">⌁</div><span class="tip-number">04 / FOKUS</span><h3>Kurangi distraksi</h3><p>Simpan ponsel saat belajar dan coba timer fokus agar perhatian tidak mudah berpindah.</p><button class="tip-link" data-page="fokus">Coba timer fokus <span>→</span></button></article>
+          <article class="tip-card"><div class="tip-card-icon pink-bg">♡</div><span class="tip-number">05 / KESEIMBANGAN</span><h3>Jangan lupakan istirahat</h3><p>Istirahat, tidur yang cukup, dan waktu pribadi juga bagian penting dari rutinitas yang sehat.</p><div class="tip-action"><span>Jaga keseimbangan</span><span>↗</span></div></article>
+          <article class="tip-card"><div class="tip-card-icon yellow-bg">✓</div><span class="tip-number">06 / EVALUASI</span><h3>Tinjau progres harian</h3><p>Periksa apa yang sudah selesai dan apa yang perlu dilanjutkan. Gunakan hasilnya untuk merencanakan esok hari.</p><div class="tip-action"><span>Rayakan progres</span><span>↗</span></div></article>
+        </div>
+        <div class="bottom-quote"><span class="quote-spark">✦</span><div><strong>Ingat, bro—konsisten lebih penting daripada sempurna.</strong><p>Mulai dari satu perubahan kecil, lalu bangun kebiasaan baik dari sana.</p></div><button class="btn btn-light" data-page="tugas">Atur tugasku <span>→</span></button></div>
+      </section>
+      <footer class="main-footer"><span>© 2026 TimeWise</span><span>Dibuat untuk membantu hari-harimu lebih terarah <span class="footer-heart">♥</span></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="taskModal" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle"><div class="modal-header"><div><div class="eyebrow">RAPIKAN RENCANAMU</div><h2 id="taskModalTitle">Tambah Tugas Baru</h2><p>Masukkan detail tugas yang ingin kamu selesaikan.</p></div><button class="modal-close" data-close-modal="taskModal" aria-label="Tutup">×</button></div><form id="taskForm"><label for="taskTitle">Nama tugas <span>*</span></label><input id="taskTitle" name="title" type="text" maxlength="100" placeholder="Contoh: Mengerjakan tugas matematika" required><div class="form-row"><div><label for="taskDeadline">Deadline <span>*</span></label><input id="taskDeadline" name="deadline" type="date" required></div><div><label for="taskPriority">Prioritas</label><select id="taskPriority" name="priority"><option value="high">Tinggi</option><option value="medium" selected>Sedang</option><option value="low">Rendah</option></select></div></div><label for="taskDescription">Catatan <span class="optional">(opsional)</span></label><textarea id="taskDescription" name="description" rows="3" maxlength="300" placeholder="Catatan singkat tentang tugas ini..."></textarea><div class="modal-actions"><button type="button" class="btn btn-outline" data-close-modal="taskModal">Batal</button><button type="submit" class="btn btn-primary" id="saveTaskBtn">Simpan Tugas</button></div></form></div></div>
+
+  <div class="modal-backdrop" id="scheduleModal" aria-hidden="true"><div class="modal modal-small" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle"><div class="modal-header"><div><div class="eyebrow">SUSUN RUTINITASMU</div><h2 id="scheduleModalTitle">Tambah Agenda</h2><p>Atur kegiatan supaya harimu lebih seimbang.</p></div><button class="modal-close" data-close-modal="scheduleModal" aria-label="Tutup">×</button></div><form id="scheduleForm"><label for="scheduleTitle">Nama kegiatan <span>*</span></label><input id="scheduleTitle" type="text" maxlength="80" placeholder="Contoh: Belajar matematika" required><div class="form-row"><div><label for="scheduleStart">Mulai <span>*</span></label><input id="scheduleStart" type="time" value="08:00" required></div><div><label for="scheduleEnd">Selesai <span>*</span></label><input id="scheduleEnd" type="time" value="09:00" required></div></div><label for="scheduleCategory">Kategori</label><select id="scheduleCategory"><option value="Belajar">Belajar</option><option value="Sekolah">Sekolah</option><option value="Istirahat">Istirahat</option><option value="Pribadi">Pribadi</option><option value="Lainnya">Lainnya</option></select><div class="modal-actions"><button type="button" class="btn btn-outline" data-close-modal="scheduleModal">Batal</button><button type="submit" class="btn btn-primary">Simpan Agenda</button></div></form></div></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Berhasil disimpan</span></div>
+  <script src="script.js"></script>
+</body>
+</html>
